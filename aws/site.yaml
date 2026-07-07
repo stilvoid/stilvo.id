@@ -1,0 +1,34 @@
+Description: |
+  Custom domain setup for stilvo.id
+
+Parameters:
+  GitHubIPv4:
+    Type: CommaDelimitedList
+    Default: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+
+  GitHubIPv6:
+    Type: CommaDelimitedList
+    Default: 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153
+
+  Domain:
+    Type: String
+    Default: stilvo.id
+
+Resources:
+  RecordSetA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Type: A
+      HostedZoneName: !Sub ${Domain}.
+      Name: !Sub ${Domain}.
+      ResourceRecords: !Ref GitHubIPv4
+      TTL: 30
+
+  RecordSetAAAA:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Type: AAAA
+      HostedZoneName: !Sub ${Domain}.
+      Name: !Sub ${Domain}.
+      ResourceRecords: !Ref GitHubIPv6
+      TTL: 30
