@@ -22,12 +22,17 @@ h1 {
     padding: 0;
 }
 
+.dot {
+    color: #4A4A4A;
+}
+
 nav a {
-    color: #cde;
+    color: #F9769F;
     text-decoration: none;
 }
 
 nav a:hover {
+    color: #72DD27;
     text-decoration: underline;
 }
 

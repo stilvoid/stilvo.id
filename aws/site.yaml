@@ -14,21 +14,59 @@ Parameters:
     Type: String
     Default: stilvo.id
 
+  HostedZoneId:
+    Type: String
+    Default: Z002200010M84RPPNNZYK
+
+  Redirect1Domain:
+    Type: String
+    Default: offend.me.uk
+
+  Redirect1HostedZoneId:
+    Type: String
+    Default: Z336NFTTB1OUWH
+
+  Redirect2Domain:
+    Type: String
+    Default: engledow.me
+
+  Redirect2HostedZoneId:
+    Type: String
+    Default: Z2P7I0F5O8H8AM
+
 Resources:
-  RecordSetA:
+  ApexRecordSetA:
     Type: AWS::Route53::RecordSet
     Properties:
       Type: A
-      HostedZoneName: !Sub ${Domain}.
+      HostedZoneId: !Ref HostedZoneId
       Name: !Sub ${Domain}.
       ResourceRecords: !Ref GitHubIPv4
       TTL: 30
 
-  RecordSetAAAA:
+  ApexRecordSetAAAA:
     Type: AWS::Route53::RecordSet
     Properties:
       Type: AAAA
-      HostedZoneName: !Sub ${Domain}.
+      HostedZoneId: !Ref HostedZoneId
       Name: !Sub ${Domain}.
       ResourceRecords: !Ref GitHubIPv6
       TTL: 30
+
+  Redirect1:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: domain.yaml
+      Parameters:
+        HostedZoneId: !Ref Redirect1HostedZoneId
+        SourceDomain: !Ref Redirect1Domain
+        TargetDomain: !Ref Domain
+
+  Redirect2:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: domain.yaml
+      Parameters:
+        HostedZoneId: !Ref Redirect2HostedZoneId
+        SourceDomain: !Ref Redirect2Domain
+        TargetDomain: !Ref Domain
