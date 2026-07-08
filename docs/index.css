@@ -23,18 +23,18 @@ h1 {
 }
 
 .dot {
-    color: #4A4A4A;
+    color: #4a4a4a;
     position: relative;
     top: -0.25em;
 }
 
 nav a {
-    color: #F9769F;
+    color: #f9769f;
     text-decoration: none;
 }
 
 nav a:hover {
-    color: #72DD27;
+    color: #76f9d0;
     text-decoration: underline;
 }
 
